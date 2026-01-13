@@ -1,9 +1,14 @@
+using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class CommonMob : MonoBehaviour, IHighlightable
 {   
     private GameObject player;
     [SerializeField] private LayerMask playerLayer;
+    private float atk = 15;
+    private PlayerManager playerManager;
+    
     
     private void Awake()
     {
@@ -21,12 +26,22 @@ public class CommonMob : MonoBehaviour, IHighlightable
         
         if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 2f, playerLayer))
         {
-            Debug.Log("shoot");
+            if(hitInfo.collider.GetComponent<PlayerManager>() != null)
+            {   
+                Debug.Log(hitInfo.collider.GetComponent<PlayerManager>().CurrentHP); 
+                //StartCoroutine(dealDamage());  
+            }
+
         }
         Debug.DrawRay(transform.position, transform.forward * 2f, Color.red, 0.2f);
     }
 
-
+    /*private IEnumerator dealDamage()
+    {   
+        yield return new WaitForSeconds(2f);
+        playerManager.ApplyDamage(atk);
+    }
+    */
 
     public void Highlight()
     {

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.TextCore.Text;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {   
@@ -22,30 +23,31 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float mov_moveSpeed = 2f;   
     [SerializeField] private float mov_jumpForce = 5f;
     private UnityEngine.Vector2 mov_movementInput;   
-    
+
+    [Header("Player HP")]
+    private float maxHP = 100;
+    private float minHP = 0;
+    private float currentHP;
+    public float CurrentHP { get {return currentHP;} }
+    [SerializeField] private Slider slider;
+
     private void Awake()
-    {
+    {   
         mComp_playerInput = GetComponent<PlayerInput>();
         mComp_jumpAction = mComp_playerInput.actions.FindAction("Jump");
         mComp_rigidbody = GetComponent<Rigidbody>();
-    }
 
-    private void Update()
-    {   
-        bool grounded = isGrounded();
+        //HP values
+        slider.maxValue = maxHP;
+        slider.minValue = minHP;
 
-        if (grounded && mComp_jumpAction.triggered)
-        {
-            Jump(mov_jumpForce);
-        }
+        currentHP = maxHP;
+         
+    } 
 
-        Look();
-
-    }
-
-    private void FixedUpdate()
+    public void ApplyDamage(float dmgTaken)
     {
-        Walk(mov_moveSpeed);
+        currentHP =- dmgTaken;
     }
 
     /*
@@ -124,10 +126,26 @@ public class PlayerManager : MonoBehaviour
         */
     } 
 
-    public float DamageTaken(float damageDealt)
+    private void Update()
     {   
-        return damageDealt;
+        bool grounded = isGrounded();
+
+        if (grounded && mComp_jumpAction.triggered)
+        {
+            Jump(mov_jumpForce);
+        }
+
+        slider.value = currentHP;
+        Look();
+
     }
+
+    private void FixedUpdate()
+    {
+        Walk(mov_moveSpeed);
+    }
+
+   
 
    
     
