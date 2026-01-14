@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour
 
     public void ApplyDamage(float dmgTaken)
     {
-        currentHP =- dmgTaken;
+        currentHP = currentHP - dmgTaken;
     }
 
     /*
