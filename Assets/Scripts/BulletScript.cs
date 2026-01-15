@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BulletScript : MonoBehaviour
 {   
@@ -15,17 +16,20 @@ public class BulletScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.Translate(0f, 0f, bulletSpeed * Time.fixedDeltaTime);
+        //transform.Translate(0f, 0f, bulletSpeed * Time.fixedDeltaTime);
     }
 
     private IEnumerator DestroyPrefab()
     {
-        yield return new WaitForSeconds(2.3f);
+        yield return new WaitForSeconds(3.3f);
         Destroy(gameObject);
     }
 
-    private void OllisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        // damage the player here 
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Hit Player");
+        }
     }
 }

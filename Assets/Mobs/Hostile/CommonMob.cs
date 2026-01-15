@@ -8,13 +8,15 @@ public class CommonMob : MonoBehaviour, IHighlightable
     private GameObject player;
     private BulletScript bulletScript;
     private float atk = 1f;
-    private float fireRate = 3f;
+    private float fireRate = 4f;
     private float FireRate { get { return fireRate; } set {fireRate = value;} }
     private PlayerManager playerManager;
     private Vector3 playerPos;
     private Vector3 playerVelo;
     private float interceptTime;
     private float bulletSpeed;  
+    private float t1;
+    private float t2;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Object bulletPrefab;
 
@@ -26,7 +28,7 @@ public class CommonMob : MonoBehaviour, IHighlightable
 
     private Vector3 shootDir()
     {   
-        bulletSpeed = bulletScript.BulletSpeed;
+        bulletSpeed = 10f; //bulletScript.BulletSpeed;
         playerPos = player.transform.position - transform.position;
         playerVelo = player.GetComponent<Rigidbody>().linearVelocity;
 
@@ -45,35 +47,44 @@ public class CommonMob : MonoBehaviour, IHighlightable
             interceptTime = Mathf.Max(t1, t2);
         }
 
+        Debug.Log("t1" + t1);
+        Debug.Log("t2" + t2);
+        
         Vector3 aimDirection = playerPos + playerVelo * interceptTime;
         return aimDirection.normalized;
+
     }
 
     //FFUCK THIS SHIT 
-    //find a way to make this the aiming direction without bugging out 
+    //find a way to make this work on x it only aims ahead on jump and fall
     
-    void Update()
+    private void rotate()
+    {
+        
+    }
+    void FixedUpdate()
     {   
         LockOnPlayer();
     }
 
     private void LockOnPlayer()
     {   
-        Transform target = player.transform;
-        transform.rotation = Quaternion.LookRotation(target.position - transform.position , Vector3.up); 
+        transform.rotation = Quaternion.LookRotation(shootDir(), Vector3.up); //target.position - transform.position , Vector3.up); 
         
-        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 20f, playerLayer))
+        if(Physics.Raycast(transform.position, shootDir(), out RaycastHit hitInfo, 20f, playerLayer))
         {   
             fireRate -= Time.deltaTime;
-            if(fireRate <= 0 && hitInfo.collider.GetComponent<PlayerManager>() != null)
+            if(fireRate <= 0 )//&& hitInfo.collider.GetComponent<PlayerManager>() != null)
             {   
+                Debug.Log(fireRate);
                 Debug.Log(hitInfo.collider.GetComponent<PlayerManager>().CurrentHP); 
+                Debug.Log(shootDir());
                 FireProjectile();
-                fireRate = 2;
+                fireRate = 4;
             }
 
         }
-        Debug.DrawRay(transform.position, transform.forward * 20f, Color.red, 0.2f);
+        Debug.DrawRay(transform.position, shootDir() * 20f, Color.red, 0.1f);
     }
 
     //add shoot that instantiates a bullet prefab that aims to hit the player
@@ -81,7 +92,9 @@ public class CommonMob : MonoBehaviour, IHighlightable
 
     private void FireProjectile()
     {
-        Instantiate(bulletPrefab, transform.position, transform.rotation);
+        GameObject bulletInstance = Instantiate(bulletPrefab, transform.position, transform.rotation) as GameObject;
+        bulletInstance.GetComponent<Rigidbody>().linearVelocity = shootDir() * bulletSpeed;
+    
     }
 
     public void Highlight()

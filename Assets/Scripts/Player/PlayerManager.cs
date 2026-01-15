@@ -42,6 +42,8 @@ public class PlayerManager : MonoBehaviour
         slider.minValue = minHP;
 
         currentHP = maxHP;
+
+        mComp_rigidbody.maxLinearVelocity = 8f;
          
     } 
 
@@ -100,7 +102,8 @@ public class PlayerManager : MonoBehaviour
         camRight.Normalize();
 
         UnityEngine.Vector3 move = camForward * mov_movementInput.y + camRight * mov_movementInput.x;
-        mComp_rigidbody.MovePosition(mComp_rigidbody.position + move.normalized * speed * Time.fixedDeltaTime);
+        mComp_rigidbody.AddForce(move.normalized * speed, ForceMode.VelocityChange);
+
     }
 
     private void Jump(float jumpForce)
