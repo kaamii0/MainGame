@@ -56,7 +56,7 @@ public class CommonMob : MonoBehaviour, IHighlightable
     }
 
     //FFUCK THIS SHIT 
-    //find a way to make this work on x it only aims ahead on jump and fall
+    //This made me REWRITE THE MOVEMENT SYSTEM 
     
     private void rotate()
     {

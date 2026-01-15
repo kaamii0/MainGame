@@ -43,7 +43,7 @@ public class PlayerManager : MonoBehaviour
 
         currentHP = maxHP;
 
-        mComp_rigidbody.maxLinearVelocity = 8f;
+        mComp_rigidbody.maxLinearVelocity = 4f;
          
     } 
 
