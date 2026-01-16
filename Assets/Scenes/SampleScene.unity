@@ -1373,8 +1373,8 @@ MonoBehaviour:
     m_Bits: 136
   mComp_cinemachineCamera: {fileID: 1742113189}
   mComp_head: {fileID: 1713064309}
-  mov_moveSpeed: 2
-  mov_jumpForce: 4.5
+  mov_moveSpeed: 0.18
+  mov_jumpForce: 2.08
   slider: {fileID: 1483716777}
 --- !u!114 &454310571
 MonoBehaviour:
@@ -3468,7 +3468,8 @@ GameObject:
   - component: {fileID: 1285568644}
   - component: {fileID: 1285568648}
   - component: {fileID: 1285568649}
-  m_Layer: 6
+  - component: {fileID: 1285568650}
+  m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3613,6 +3614,27 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   bulletPrefab: {fileID: 3313671878283838722, guid: 1833e2204d1c5ad4f889d5bae5bb700d, type: 3}
+--- !u!135 &1285568650
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285568643}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 8
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 18
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1001 &1302594968
 PrefabInstance:
   m_ObjectHideFlags: 0

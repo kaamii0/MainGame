@@ -4,7 +4,6 @@ using UnityEngine.AI;
 
 public class BulletScript : MonoBehaviour
 {   
-    
     private float bulletSpeed = 30f;
     public float BulletSpeed { get {return bulletSpeed;} }
 
@@ -16,7 +15,7 @@ public class BulletScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //transform.Translate(0f, 0f, bulletSpeed * Time.fixedDeltaTime);
+       
     }
 
     private IEnumerator DestroyPrefab()

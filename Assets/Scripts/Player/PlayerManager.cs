@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
      
     [Header("Movement Variables")]
     [SerializeField] private float mov_moveSpeed = 2f;   
-    [SerializeField] private float mov_jumpForce = 5f;
+    [SerializeField] private float mov_jumpForce = 2f;
     private UnityEngine.Vector2 mov_movementInput;   
 
     [Header("Player HP")]
@@ -37,29 +37,18 @@ public class PlayerManager : MonoBehaviour
         mComp_jumpAction = mComp_playerInput.actions.FindAction("Jump");
         mComp_rigidbody = GetComponent<Rigidbody>();
 
-        //HP values
+        
         slider.maxValue = maxHP;
         slider.minValue = minHP;
 
         currentHP = maxHP;
-
-        mComp_rigidbody.maxLinearVelocity = 4f;
-         
+    
     } 
 
     public void ApplyDamage(float dmgTaken)
     {
         currentHP = currentHP - dmgTaken;
     }
-
-    /*
-    public float explosionRadius = 0.2f;
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = UnityEngine.Color.red;
-        Gizmos.DrawSphere(transform.position, explosionRadius);
-    }
-    */
 
     private bool isGrounded()
     {   
@@ -118,15 +107,6 @@ public class PlayerManager : MonoBehaviour
 
         transform.rotation = UnityEngine.Quaternion.Euler(eulerAngle * 0.3f, cameraEuler.y , 0f);   
 
-
-        //old Euler handling from when I was figuring out signed angles <3
-
-        /*
-        UnityEngine.Quaternion cinemachineTransform = mComp_cinemachineCamera.transform.rotation;
-        UnityEngine.Vector3 cinemachineEuler = cinemachineTransform.eulerAngles;
-        
-        transform.rotation = UnityEngine.Quaternion.Euler(cinemachineEuler.x * 0.3f, cinemachineEuler.y , 0f);   
-        */
     } 
 
     private void Update()
@@ -147,20 +127,5 @@ public class PlayerManager : MonoBehaviour
     {
         Walk(mov_moveSpeed);
     }
-
-   
-
-   
-    
-
-
-
-
-
-
-
-
-
-    
 
 }
