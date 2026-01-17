@@ -42,6 +42,8 @@ public class PlayerManager : MonoBehaviour
         slider.minValue = minHP;
 
         currentHP = maxHP;
+
+        mComp_rigidbody.maxLinearVelocity = 5f;
     
     } 
 
