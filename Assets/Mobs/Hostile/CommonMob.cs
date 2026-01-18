@@ -75,7 +75,7 @@ public class CommonMob : MonoBehaviour, IHighlightable
     {
         if(other.gameObject.CompareTag("Player"))
         {  
-            Debug.Log("Player in range");
+            Debug.Log("player in range");
             InRange = true;
         }
     }
@@ -84,7 +84,7 @@ public class CommonMob : MonoBehaviour, IHighlightable
     {
         if(other.gameObject.CompareTag("Player"))
         {  
-            Debug.Log("Player out of range");
+            Debug.Log("player out of range");
             InRange = false;
         }
     }
@@ -103,6 +103,13 @@ public class CommonMob : MonoBehaviour, IHighlightable
 
         Debug.DrawRay(transform.position, shootDir() * 20f, Color.lightGoldenRodYellow, 0.1f);
     }
+
+    private void MoveTowardsPlayer()
+    {
+        //ik i can use player velocity and distance here similar to shootdir 
+        //but im lazy and this is good enough for now so i will deal with
+        //it tommorow 
+    }
     
     private void FireProjectile()
     {   
@@ -113,6 +120,6 @@ public class CommonMob : MonoBehaviour, IHighlightable
 
     public void Highlight()
     {
-         
+
     }
 }

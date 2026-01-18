@@ -6,12 +6,12 @@ public class BulletScript : MonoBehaviour
 {   
     private float bulletSpeed = 30f;
     public float BulletSpeed { get {return bulletSpeed;} }
-    
+
     private void Start()
     {
         StartCoroutine(DestroyPrefab());
     }
-    
+
     private void DestroyOnHit()
     {
         Destroy(gameObject);
@@ -25,8 +25,18 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {   
-        Debug.Log("Hit Something");
+        Debug.Log("hit the ground or whatever " + collision.gameObject.name + " is");
         DestroyOnHit();
+
+        if(collision.gameObject.CompareTag("Player"))
+        {   
+            Debug.Log("hgit player");
+            collision.gameObject.GetComponent<PlayerManager>().ApplyDamage(10f);
+        }
+
+         
+
+         
         
     }
 }

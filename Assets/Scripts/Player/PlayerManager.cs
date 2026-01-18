@@ -1,5 +1,6 @@
 using System;
 using System.Numerics;
+using JetBrains.Annotations;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -37,7 +38,7 @@ public class PlayerManager : MonoBehaviour
         mComp_jumpAction = mComp_playerInput.actions.FindAction("Jump");
         mComp_rigidbody = GetComponent<Rigidbody>();
 
-        
+
         slider.maxValue = maxHP;
         slider.minValue = minHP;
 
@@ -93,7 +94,7 @@ public class PlayerManager : MonoBehaviour
         camRight.Normalize();
 
         UnityEngine.Vector3 move = camForward * mov_movementInput.y + camRight * mov_movementInput.x;
-        mComp_rigidbody.AddForce(move.normalized * speed, ForceMode.VelocityChange);
+        mComp_rigidbody.AddForce(move.normalized * speed, ForceMode.Impulse);
 
     }
 
