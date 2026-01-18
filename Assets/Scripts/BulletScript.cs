@@ -26,7 +26,7 @@ public class BulletScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {   
         Debug.Log("Hit Something");
-        //DestroyOnHit();
+        DestroyOnHit();
         
     }
 }

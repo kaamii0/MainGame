@@ -105,13 +105,14 @@ public class CommonMob : MonoBehaviour, IHighlightable
     }
     
     private void FireProjectile()
-    {
-        GameObject bulletInstance = Instantiate(bulletPrefab, transform.position, transform.rotation);
+    {   
+        Transform shootPoint = transform.GetChild(0).gameObject.transform;
+        GameObject bulletInstance = Instantiate(bulletPrefab, shootPoint.position, transform.rotation);
         bulletInstance.GetComponent<Rigidbody>().linearVelocity = shootDir() * bulletSpeed;
     }
 
     public void Highlight()
     {
-        
+         
     }
 }
