@@ -123,6 +123,10 @@ public class PlayerManager : MonoBehaviour
 
         slider.value = currentHP;
         Look();
+        Debug.Log(mComp_rigidbody.linearVelocity.x + " x");
+        Debug.Log(mComp_rigidbody.linearVelocity.y + " y");
+        Debug.Log(mComp_rigidbody.linearVelocity.z + " z");
+
 
     }
 
