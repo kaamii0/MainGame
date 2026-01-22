@@ -69,18 +69,14 @@ public class CommonMob : MonoBehaviour, IHighlightable
 
     private void MoveTowardsPlayer()
     {   
-        float jerk = UnityEngine.Random.Range(innacuracyDegree -1f, innacuracyDegree +1f);
+        float maintainDistance = 6f - Time.deltaTime;
 
-        float maintainDistance = 10f - Time.deltaTime;
         NavMeshAgent navAgent = GetComponent<NavMeshAgent>();
-
-        navAgent.SetDestination(new UnityEngine.Vector3(player.transform.position.x + jerk, transform.position.y, player.transform.position.z + maintainDistance));
+        navAgent.SetDestination(new UnityEngine.Vector3(player.transform.position.x + UnityEngine.Random.Range(-7f, 7f), transform.position.y, player.transform.position.z + maintainDistance));
     }
 
     void FixedUpdate()
     {   
-         
-
         if (InRange)
         {
             LockOnPlayer();
