@@ -70,6 +70,7 @@ public class CommonMob : MonoBehaviour, IHighlightable
     private void MoveTowardsPlayer()
     {   
         float maintainDistance = 6f - Time.deltaTime;
+        
 
         NavMeshAgent navAgent = GetComponent<NavMeshAgent>();
         navAgent.SetDestination(new UnityEngine.Vector3(player.transform.position.x + UnityEngine.Random.Range(-7f, 7f), transform.position.y, player.transform.position.z + maintainDistance));
