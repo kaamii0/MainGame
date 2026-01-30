@@ -839,7 +839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &291348454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,7 +852,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2315703a736341440a83fbd608141d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlanetGen
-  scale: 2
+  horizontalScale: 8
+  verticalScale: 8
   planetPrefab: {fileID: 3015948461191231894, guid: 2393ca802655b0e488f0b136497443f1, type: 3}
 --- !u!4 &291348455
 Transform:

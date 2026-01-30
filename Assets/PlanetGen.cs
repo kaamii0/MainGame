@@ -1,3 +1,4 @@
+using System;
 using System.Numerics;
 using Unity.Mathematics;
 using UnityEditor.PackageManager.UI;
@@ -8,7 +9,8 @@ public class PlanetGen : MonoBehaviour
     private float width = 20;
     private float length = 20;
 
-    [SerializeField] private float scale = 2;
+    [SerializeField] private float horizontalScale = 2;
+    [SerializeField] private float verticalScale = 2;
     [SerializeField] private GameObject planetPrefab;
 
     void Start()
@@ -22,7 +24,7 @@ public class PlanetGen : MonoBehaviour
         {
             for(float z = 0; z < length; z++)
             {   
-                UnityEngine.Vector3 pos = new UnityEngine.Vector3(x * scale, 0f, z * scale);
+                UnityEngine.Vector3 pos = new UnityEngine.Vector3(x * horizontalScale, noiseGeneration(x, z, 6f) * verticalScale, z * horizontalScale);
                 GameObject gen = Instantiate(planetPrefab, pos, UnityEngine.Quaternion.identity);
 
                 gen.transform.SetParent(this.transform);
@@ -31,8 +33,13 @@ public class PlanetGen : MonoBehaviour
     }
     }
 
-    private float noiseGeneration()
-    {
-        return 0f;
+    private float noiseGeneration(float xCoord, float zCoord, float noiseScale)
+    {   
+        float xNoise = (xCoord + transform.position.x) / noiseScale;
+        float zNoise = (zCoord + transform.position.z) / noiseScale;
+
+        float yCoord = Mathf.PerlinNoise(xNoise, zNoise);
+
+        return yCoord;
     }
 }
